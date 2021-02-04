@@ -12,6 +12,7 @@ repositories {
 project.ext {
     dropwizardVersion = '2.0.19'
     mongoVersion = '3.12.7'
+    gsonVersion = '2.3.1'
 }
 
 dependencies {
@@ -19,6 +20,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: mongoVersion
+    compile group: 'com.google.code.gson', name: 'gson', version: gsonVersion
+
 }
 
 test {

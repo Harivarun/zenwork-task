@@ -1,2 +1,7 @@
 logging:
   level: INFO
+
+mongoHost : localhost
+mongoPort : 27017
+mongoDB : taskDB
+collectionName: stores
