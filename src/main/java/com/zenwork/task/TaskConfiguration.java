@@ -26,6 +26,23 @@ public class TaskConfiguration extends Configuration {
     @NotEmpty
     public String collectionName;
 
+    @JsonProperty
+    @NotEmpty
+    public String adminCollectionName;
+
+    @JsonProperty
+    @NotEmpty
+    public String storeCollectionName;
+
+    @JsonProperty
+    @NotEmpty
+    public String subuserCollectionName;
+
+    @JsonProperty
+    @NotEmpty
+    public String productCollectionName;
+
+
     public String getMongoHost() {
         return mongoHost;
     }
@@ -56,5 +73,37 @@ public class TaskConfiguration extends Configuration {
 
     public void setCollectionName(String collectionName) {
         this.collectionName = collectionName;
+    }
+
+    public String getAdminCollectionName() {
+        return adminCollectionName;
+    }
+
+    public void setAdminCollectionName(String adminCollectionName) {
+        this.adminCollectionName = adminCollectionName;
+    }
+
+    public String getStoreCollectionName() {
+        return storeCollectionName;
+    }
+
+    public void setStoreCollectionName(String storeCollectionName) {
+        this.storeCollectionName = storeCollectionName;
+    }
+
+    public String getSubuserCollectionName() {
+        return subuserCollectionName;
+    }
+
+    public void setSubuserCollectionName(String subuserCollectionName) {
+        this.subuserCollectionName = subuserCollectionName;
+    }
+
+    public String getProductCollectionName() {
+        return productCollectionName;
+    }
+
+    public void setProductCollectionName(String productCollectionName) {
+        this.productCollectionName = productCollectionName;
     }
 }

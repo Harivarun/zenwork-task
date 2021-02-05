@@ -6,6 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import com.zenwork.task.controller.AdminRestController;
 import com.zenwork.task.controller.SubUserRestController;
 import com.zenwork.task.service.AdminService;
+import com.zenwork.task.service.SubuserService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -29,9 +30,11 @@ public class TaskApplication extends Application<TaskConfiguration> {
         LOGGER.info("Registering Task resources");
         MongoClient mongoClient = new MongoClient(configuration.getMongoHost(), configuration.getMongoPort());
         MongoDatabase db = mongoClient.getDatabase(configuration.getMongoDB());
-        MongoCollection<Document> collection = db.getCollection(configuration.getCollectionName());
-        LOGGER.info("Registering RESTful API resources");
-        environment.jersey().register(new AdminRestController(collection,environment.getValidator(), new AdminService()));
-        environment.jersey().register(new SubUserRestController(environment.getValidator()));
+        MongoCollection<Document> adminCollection = db.getCollection(configuration.getAdminCollectionName());
+        MongoCollection<Document> storeCollection = db.getCollection(configuration.getStoreCollectionName());
+        MongoCollection<Document> subuserCollection = db.getCollection(configuration.getSubuserCollectionName());
+        MongoCollection<Document> productCollection = db.getCollection(configuration.getProductCollectionName());
+        environment.jersey().register(new AdminRestController(adminCollection,environment.getValidator(), new AdminService()));
+        environment.jersey().register(new SubUserRestController(subuserCollection,environment.getValidator(), new SubuserService()));
     }
 }

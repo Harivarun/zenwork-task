@@ -21,7 +21,7 @@ dependencies {
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: mongoVersion
     compile group: 'com.google.code.gson', name: 'gson', version: gsonVersion
-
+    compile group: 'io.dropwizard', name: 'dropwizard-auth', version: dropwizardVersion
 }
 
 test {

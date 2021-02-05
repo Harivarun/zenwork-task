@@ -31,13 +31,29 @@ public class AdminRestController {
         this.adminService = adminService;
     }
 
-    @GET
-    public Response getAdmin() {
-        return Response.ok("Hello").build();
+    @POST
+    @Path("/login")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response getAdmin(Admin admin){
+        Document adminDoc = adminService.findAdmin(collection, admin.getEmail());
+        Map<String, String> response = new HashMap<>();
+        if(adminDoc != null){
+            if(admin.getPassword().equals(adminDoc.getString("password"))){
+                return Response.ok(adminDoc).build();
+            }else{
+                response.put("message", "Password Incorrect");
+                return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+            }
+        }else{
+            response.put("message", "Invalid Email Address");
+            return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
+        }
+
     }
 
     @POST
-    @Path("/create")
+    @Path("/signup")
     @Timed
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)

@@ -4,4 +4,8 @@ logging:
 mongoHost : localhost
 mongoPort : 27017
 mongoDB : taskDB
-collectionName: stores
+adminCollectionName : admins
+storeCollectionName : stores
+subuserCollectionName : subusers
+productCollectionName : products
+collectionName : admins
