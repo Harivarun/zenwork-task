@@ -60,7 +60,6 @@ public class SubUserRestController {
             response.put("message", "Invalid Email Address");
             return Response.status(Response.Status.BAD_REQUEST).entity(response).build();
         }
-
     }
 
     @POST

@@ -4,8 +4,11 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.zenwork.task.controller.AdminRestController;
+import com.zenwork.task.controller.ProductRestController;
 import com.zenwork.task.controller.SubUserRestController;
 import com.zenwork.task.service.AdminService;
+import com.zenwork.task.service.ProductService;
+import com.zenwork.task.service.StoreService;
 import com.zenwork.task.service.SubuserService;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -36,5 +39,6 @@ public class TaskApplication extends Application<TaskConfiguration> {
         MongoCollection<Document> productCollection = db.getCollection(configuration.getProductCollectionName());
         environment.jersey().register(new AdminRestController(adminCollection,environment.getValidator(), new AdminService()));
         environment.jersey().register(new SubUserRestController(subuserCollection,environment.getValidator(), new SubuserService()));
+        environment.jersey().register(new ProductRestController(productCollection,environment.getValidator(),new ProductService()));
     }
 }

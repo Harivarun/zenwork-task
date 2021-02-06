@@ -15,11 +15,12 @@ public class Product {
     private String category;
 
     @NotNull
-    @Pattern(regexp = "")
     private long quantity;
 
     @NotNull
     private String description;
+
+    private String storeID;
 
     public String getName() {
         return name;
@@ -53,13 +54,22 @@ public class Product {
         this.description = description;
     }
 
+    public String getStoreID() {
+        return storeID;
+    }
+
+    public void setStoreID(String storeID) {
+        this.storeID = storeID;
+    }
+
     public Product() {
     }
 
-    public Product(String name, String category, long quantity, String description) {
+    public Product(String name, String category, long quantity, String description,String storeID) {
         this.name = name;
         this.category = category;
         this.quantity = quantity;
         this.description = description;
+        this.storeID = storeID;
     }
 }

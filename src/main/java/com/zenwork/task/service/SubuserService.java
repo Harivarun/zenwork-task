@@ -16,7 +16,6 @@ import static com.mongodb.client.model.Updates.set;
 
 public class SubuserService {
 
-
     public void createSubuser(MongoCollection<Document> collection, Document document) {
          collection.insertOne(document);
     }
