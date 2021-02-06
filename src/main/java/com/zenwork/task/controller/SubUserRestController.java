@@ -70,11 +70,7 @@ public class SubUserRestController {
     public Response createSubuser(Subuser subuser){
         Set<ConstraintViolation<Subuser>> violations = validator.validate(subuser);
         if(violations.size() > 0) {
-            ArrayList<String> validationMessages = new ArrayList<>();
-            for (ConstraintViolation<Subuser> violation : violations) {
-                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
-            }
-            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+            return getResponse(violations);
         }else{
             Gson gson = new Gson();
             String json = gson.toJson(subuser);
@@ -85,6 +81,7 @@ public class SubUserRestController {
         }
     }
 
+
     @PUT
     @Path("/update")
     @Timed
@@ -94,11 +91,7 @@ public class SubUserRestController {
 
         Set<ConstraintViolation<Subuser>> violations = validator.validate(subuser);
         if(violations.size() > 0) {
-            ArrayList<String> validationMessages = new ArrayList<>();
-            for (ConstraintViolation<Subuser> violation : violations) {
-                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
-            }
-            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+            return getResponse(violations);
         }else{
             subuserService.updateSubuser(collection, subuser);
             Map<String, String> response = new HashMap<>();
@@ -121,5 +114,14 @@ public class SubUserRestController {
             response.put("message","Subuser not found");
             return  Response.status(Response.Status.BAD_REQUEST).entity(response).build();
         }
+    }
+
+
+    private Response getResponse(Set<ConstraintViolation<Subuser>> violations) {
+        ArrayList<String> validationMessages = new ArrayList<>();
+        for (ConstraintViolation<Subuser> violation : violations) {
+            validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
     }
 }

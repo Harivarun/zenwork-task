@@ -37,7 +37,7 @@ public class ProductService {
         Bson storeID = set("storeID",product.getStoreID());
         Bson productDoc = combine(categoryField,quantityField,descriptionField,storeID);
 
-        UpdateResult updateResult = collection.updateOne(filter, productDoc);
+        collection.updateOne(filter, productDoc);
     }
 
     public DeleteResult deleteProduct(MongoCollection<Document> collection, String name) {

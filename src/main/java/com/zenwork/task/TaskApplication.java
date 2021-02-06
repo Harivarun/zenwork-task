@@ -5,6 +5,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.zenwork.task.controller.AdminRestController;
 import com.zenwork.task.controller.ProductRestController;
+import com.zenwork.task.controller.StoreRestController;
 import com.zenwork.task.controller.SubUserRestController;
 import com.zenwork.task.service.AdminService;
 import com.zenwork.task.service.ProductService;
@@ -40,5 +41,6 @@ public class TaskApplication extends Application<TaskConfiguration> {
         environment.jersey().register(new AdminRestController(adminCollection,environment.getValidator(), new AdminService()));
         environment.jersey().register(new SubUserRestController(subuserCollection,environment.getValidator(), new SubuserService()));
         environment.jersey().register(new ProductRestController(productCollection,environment.getValidator(),new ProductService()));
+        environment.jersey().register(new StoreRestController(storeCollection,environment.getValidator(), new StoreService()));
     }
 }

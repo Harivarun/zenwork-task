@@ -60,11 +60,7 @@ public class ProductRestController {
     public Response createProduct(Product product){
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
         if(violations.size() > 0) {
-            ArrayList<String> validationMessages = new ArrayList<>();
-            for (ConstraintViolation<Product> violation : violations) {
-                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
-            }
-            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+            return getResponse(violations);
         }else{
             Gson gson = new Gson();
             String json = gson.toJson(product);
@@ -85,11 +81,7 @@ public class ProductRestController {
 
         Set<ConstraintViolation<Product>> violations = validator.validate(product);
         if(violations.size() > 0) {
-            ArrayList<String> validationMessages = new ArrayList<>();
-            for (ConstraintViolation<Product> violation : violations) {
-                validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
-            }
-            return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
+            return getResponse(violations);
         }else{
             productService.updateProduct(collection, product);
             Map<String, String> response = new HashMap<>();
@@ -112,5 +104,13 @@ public class ProductRestController {
             response.put("message","product deleted");
             return Response.ok(response).build();
         }
+    }
+
+    private Response getResponse(Set<ConstraintViolation<Product>> violations) {
+        ArrayList<String> validationMessages = new ArrayList<>();
+        for (ConstraintViolation<Product> violation : violations) {
+            validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+        }
+        return Response.status(Response.Status.BAD_REQUEST).entity(validationMessages).build();
     }
 }
